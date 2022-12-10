@@ -28,11 +28,6 @@ print(data)
 lsmcube = iris.load_cube('n216_land_sea_mask_from_um.nc')
 lsm_data = xr.open_dataset('n216_land_sea_mask_from_um.nc')
 land_mask = np.array(lsm_data.lsm)
-# lsmcube = iris.load_cube('coastdist_cube_n2560_global.nc') #correct this somehow
-# lsm_data = xr.open_dataset('coastdist_cube_n2560_global.nc')
-# land_mask = np.array(lsm_data.coastdist)
-# lsm = lsm_data["coastdist"]
-# lsmcube = lsm.to_iris
 
 # regrid 
 target_cube = iris.load_cube("/jet/home/sheenak/tmp_ondemand_ocean_atm200005p_symlink/sheenak/nc_noon/noon_regridded/CPPin20160101120000305SVMSGE1MD_new.nc")
@@ -84,10 +79,6 @@ for i,j in enumerate(sp):
     
     # regrid plot
     plt.figure(figsize=(21, 8))
-    # im = plt.imread("cph.png")
-    # fig, ab = plt.subplots()
-    # ab.imshow(im)
-    # iplt.contour(sp_masked_cube, cmap='RdBu_r')
     iplt.pcolormesh(sp_masked_cube, cmap='RdBu_r')
     plt.scatter(sp_regridded_data.longitude[lon], sp_regridded_data.latitude[lat], marker='*', color='cyan', s=100)
     plt.title('regridded and masked sea level pressure')
@@ -103,8 +94,6 @@ for i,j in enumerate(sp):
     gl.yformatter = LATITUDE_FORMATTER
     gl.ylabel_style = {'color': 'red', 'weight': 'bold'}
     gl.xlabel_style = {'color': 'red', 'weight': 'bold'}
-    # plt.colorbar(orientation="horizontal",fraction=0.07,anchor=(1.0,0.0))
-    # plt.savefig('sp_contour_'+str(i)+'.png')
     plt.savefig('sp_minima/sp_minima_plots/sp_minima_'+str(i)+'.png')
     plt.show()
     
